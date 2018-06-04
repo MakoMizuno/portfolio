@@ -20,12 +20,14 @@ ul {
 }
 
 button, a {
-    border: none;
+  border: none;
+  cursor: pointer;
+
+  &:focus { 
+    outline: none;
     cursor: pointer;
-  
-    &:focus { 
-      outline: none;
-      cursor: pointer;
-  
-    }
+
+  }
+
+
 }
