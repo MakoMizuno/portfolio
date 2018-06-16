@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import cx from 'classnames';
+import PropTypes from 'prop-types';
 import './PortfolioItem.scss';
+import PortfolioItemButton from '../PortfolioItemButton/PortfolioItemButton.jsx';
 
 export default class PortfolioItem extends Component {
 
@@ -20,7 +23,7 @@ export default class PortfolioItem extends Component {
   }
   render() {
     const { isHovered  } = this.state;
-    const { imageUrl, title, categories } = this.props;
+    const { imageUrl, title, categories, id } = this.props;
 
     return (
       <div className="PorfolioItem" onMouseOver={this.handleHoverIn} onMouseLeave={this.handleHoverOut}>
@@ -28,12 +31,14 @@ export default class PortfolioItem extends Component {
           <img src={imageUrl} alt="Global Clock" />
           {
             isHovered && (
-              <button className="PortfolioItem-button">See Project</button>
+              <PortfolioItemButton>
+                See Project
+              </PortfolioItemButton>
             )
           }
         </div>
         <div className="PortfolioItem-details">
-          <h3>{title}</h3>
+        <h3 className={cx( "PortfolioItem-title",{ "PortfolioItem-title--active" : isHovered })}>{title}</h3>
           <span>
             {categories.map((category) => (
               <span key={category} className="PortfolioItem-category"
@@ -47,3 +52,13 @@ export default class PortfolioItem extends Component {
     )
   }
 }
+
+PortfolioItem.propTypes = {
+  imageUrl: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  categories: PropTypes.array,
+};
+
+PortfolioItem.defaultProps = {
+  categories: [],
+};

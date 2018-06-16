@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PortfolioItem from '../PortfolioItem/PortfolioItem.jsx';
 import { portfolioItems } from '../../constants/portfolioItems.js';
 import Container from '../Container/Container.jsx';
+import { NavLink } from 'react-router-dom';
 import './TopPage.scss';
 
 export default class TopPage extends Component {
@@ -10,13 +11,17 @@ export default class TopPage extends Component {
     return (
       <Container>
         <div className="TopPage">
-        {portfolioItems.map((portfolioItem) => (
+        {portfolioItems.map((portfolioItem, index) => (
+          <NavLink
+          to={`/works/${index}`}
+          key={portfolioItem.title}>
+
             <PortfolioItem
-              key={portfolioItem.title}
               imageUrl={portfolioItem.imageUrl}
               title={portfolioItem.title}
               categories={portfolioItem.categories}
             />
+          </NavLink>
           ))}
         </div>
       </Container>
